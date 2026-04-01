@@ -13,7 +13,14 @@ services:
       - ./init.sql:/docker-entrypoint-initdb.d/01-init.sql:ro
       - ./seeder.sql:/docker-entrypoint-initdb.d/02-seeder.sql:ro
 
-  lang:
+  java:
+    image: eclipse-temurin:21
+    container_name: legacy_java
+    working_dir: /app
+    volumes:
+      - .:/app
+    depends_on:
+      - db
 
 volumes:
   postgres_data:
